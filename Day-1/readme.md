@@ -218,7 +218,7 @@ Step 11: Now Save and Click on Luanch Agent
 - Easier to learn and read, enforces best practices by design.
 - Has error handling and validation built-in to reduce syntax issues.
 - Example snippet:
-  ```pipeline
+  ```groovy
   pipeline {
     agent any
     stages {
