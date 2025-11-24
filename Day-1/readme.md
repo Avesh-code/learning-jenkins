@@ -183,4 +183,68 @@ confidential -> + Add
 Host Key Verification Strategy = non verifying verification Strategy
 ```
 Step 11: Now Save and Click on Luanch Agent
+
 ---
+# Scripted and Declarative Pipeline
+
+## Scripted Pipeline
+
+- Written entirely in Groovy scripting language.
+- Uses an imperative programming style where you explicitly define sequences of steps
+- Offers maximum flexibility and control, allowing complex, conditional, and dynamic workflows.
+- Requires good Groovy programming knowledge.
+- Example snippet:
+  ```groovy
+  node {
+    stage('Build') {
+        echo 'Building...'
+        // Build commands here
+    }
+    stage('Test') {
+        echo 'Testing...'
+        // Test commands here
+    }
+    stage('Deploy') {
+        echo 'Deploying...'
+        // Deploy commands here
+    }
+   }
+  ```
+
+## Declarative Pipeline
+
+- Uses a structured, predefined syntax with specific blocks (pipeline, agent, stages, steps).
+- Follows a declarative programming style focused on what the pipeline should do.
+- Easier to learn and read, enforces best practices by design.
+- Has error handling and validation built-in to reduce syntax issues.
+- Example snippet:
+  ```pipeline
+  pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                // Build commands here
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                // Test commands here
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+                // Deploy commands here
+            }
+        }
+    }
+  }
+  ```
+
+---
+
+# Github Webhook
+- In the Repo Setting The Webhook --> create webbhook --> add the jenkins url `http://20.51.117.84:8080/github-webhook` Done and Tick the `GitHub hook trigger for GITScm polling` in pipelie
