@@ -135,6 +135,9 @@ A Jenkins job (or project) is a configured task that Jenkins executes automatica
 ## Overview
 A Jenkins agent (also called a node or slave) is a machine that executes jobs delegated by the Jenkins controller (master). Agents help distribute workloads, scale builds, and isolate environments.
 
+## ✅ Prerequisites 
+- Java (JDK 8 or newer) must be installed. in Agent Node
+
 ## Steps to Set Up an Agent using SSh
 
 **In Master**
@@ -150,21 +153,26 @@ cat id_ed25519.pub
 ```
 
 **In Agent**
-Step 4: got to `cd ~/.ssh` and do `ls`
-Step 5: paste the Public Key `id_ed25519.pub` inside the file authorized_keys
+Step 4: Install JDk
+```
+sudo apt update
+sudo apt install fontconfig openjdk-21-jre
+```
+Step 5: got to `cd ~/.ssh` and do `ls`
+Step 6: paste the Public Key `id_ed25519.pub` inside the file authorized_keys
 ```bash
 sudo vim authorized_keys
 ```
 **In Jenkins UI**
-Step 6: Go to Manage Jenkins -> Nodes -> New Node
-Step 7: Give The name and select Parmanent Agent and Next
-Step 8: keep All the things Same only Chnage below Things
+Step 7: Go to Manage Jenkins -> Nodes -> New Node
+Step 8: Give The name and select Parmanent Agent and Next
+Step 9: keep All the things Same only Chnage below Things
 ```
 Remote root directory = /home/azureuser       # this can change if you use aws or any other
 labels = build          # you can use anything
 Launch method = Luanch Agent via SSH
 ```
-Step 9: Add the SSh Key in Jenkins Ui for Connection 
+Step 10: Add the SSh Key in Jenkins Ui for Connection 
 ```
 Host = azureuser             # you can check your host and Write the Specific host
 confidential -> + Add
@@ -174,5 +182,5 @@ confidential -> + Add
   PrivateKey = Add private key `id_ed25519` in Enter Directly Box of Private key 
 Host Key Verification Strategy = non verifying verification Strategy
 ```
-Step 10 : Now Save and Click on Luanch Agent
+Step 11: Now Save and Click on Luanch Agent
 ---
