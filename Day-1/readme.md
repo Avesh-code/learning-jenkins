@@ -248,3 +248,48 @@ Step 11: Now Save and Click on Luanch Agent
 
 # Github Webhook
 - In the Repo Setting The Webhook --> create webbhook --> add the jenkins url `http://20.51.117.84:8080/github-webhook` Done and Tick the `GitHub hook trigger for GITScm polling` in pipelie
+
+# credential management
+- In the manage jenkins --> credential --> Add credential --> add ID and Description and use as i have used in below project.
+
+```groovy
+pipeline{
+    agent { label "main-agent" }
+
+    stages{
+        stage("Code"){
+            steps{
+                echo "This is Cloning the Code"
+                git url: "https://github.com/Avesh-code/django-notes-app.git", branch: "main"
+            }
+        }
+        stage("Build"){
+            steps{
+                echo "This is building the Code"
+                sh "whoami"
+                sh "sudo docker build -t notes-app:latest ."
+            }
+        }
+        stage("push to docker hub"){
+            steps{
+                echo "This is pushing the image"
+                withCredentials([usernamePassword('credentialsId':"dockerHubCred",
+                passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
+                    
+                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass} "
+                sh "docker image tag notes-app:latest ${env.dockerHubUser}/notes-app-jenkins:latest"
+                sh "docker push ${env.dockerHubUser}/notes-app-jenkins:latest"
+                
+                }
+               
+            }
+        }
+        stage("Deploy"){
+            steps{
+                echo "This is Deploying the Code"
+                sh "docker compose up -d"
+            }
+        }
+    }
+}
+```
