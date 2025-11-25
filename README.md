@@ -13,3 +13,11 @@
   - Declarative pipeline
   - Webhook
   - credential Manager
+### Day 2: Shared libraries and User management [Document Link](https://github.com/Avesh-code/learning-jenkins/tree/main/Day-2)
+- **Concepts Covered**:
+  - Shared Libraries
+  - User management in Jenkins
+  - CI-CD-Project(Jenkins-k8s-argo-prometheus)
+- **Key Learning**:
+  - User Management
+  - Imlement Ci-CD in Realtime Projects
